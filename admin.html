@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D2B1 Admin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="admin-panel">
+    <h2>Panneau d'administration</h2>
+    <p>Nombre total d'inscriptions : <span id="userCount">0</span></p>
+    <button onclick="logout()">Déconnexion</button>
+  </div>
+  <script>
+    function logout() {
+      localStorage.removeItem("loggedIn");
+      window.location.href = "login.html";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      document.getElementById("userCount").textContent = users.length;
+    });
+  </script>
+</body>
+</html>
