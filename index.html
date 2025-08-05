@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr"> <!-- Default language set to French -->
+<html lang="en"> <!-- Default language set to English -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="quizTitle">Quiz de Préférence de Programme d'Investissement</title>
+    <title data-i18n="quizTitle">Investment Program Eligibility Quiz</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -159,144 +159,212 @@
 </head>
 <body>
     <div class="quiz-container">
-        <h1 data-i18n="quizPageTitle">Quiz de Préférence de Programme d'Investissement</h1>
-        <p data-i18n="quizIntro1">Ce quiz est conçu pour vous aider à mieux comprendre quel type de programme d'investissement correspond le mieux à vos préférences et à votre tolérance au risque, en se basant sur les concepts de programmes d'épargne de groupe.</p>
-        <p data-i18n="quizIntro2">Il ne s'agit pas d'une évaluation financière professionnelle, mais d'un outil pour vous aider à réfléchir à ce qui est le plus important pour vous dans un programme d'investissement.</p>
+        <!-- Language Selector -->
+        <div class="absolute top-4 right-4 z-10">
+            <select id="languageSelector" class="p-2 rounded-md border border-gray-300 bg-white shadow-sm">
+                <option value="en" selected>English</option>
+                <option value="fr">Français</option>
+                <option value="es">Español</option>
+                <option value="ht">Kreyòl Ayisyen</option>
+            </select>
+        </div>
 
-        <h2 data-i18n="quizInstructionsTitle">Instructions :</h2>
-        <p data-i18n="quizInstructionsText">Veuillez répondre à chacune des questions suivantes. Il n'y a pas de bonnes ou de mauvaises réponses.</p>
+        <h1 data-i18n="quizPageTitle">Investment Program Eligibility Quiz</h1>
+        <p data-i18n="quizIntro1">This quiz is designed to assess if your preferences align with the philosophy of our investment program, which emphasizes sharing and collaboration, mirroring the calculations of our simulator.</p>
+        <p data-i18n="quizIntro2">This is not a professional financial assessment, but a tool to help you think about what is most important to you in a sharing-focused investment program.</p>
+
+        <h2 data-i18n="quizInstructionsTitle">Instructions:</h2>
+        <p data-i18n="quizInstructionsText">Please answer each of the following questions. There are no right or wrong answers.</p>
 
         <form id="quizForm">
             <div class="question-block">
-                <strong data-i18n="q1">1. Quel est votre objectif principal lorsque vous investissez ?</strong>
+                <strong data-i18n="q1">1. What is your main goal when investing?</strong>
                 <label>
-                    <input type="radio" name="q1" value="a"> <span data-i18n="q1a">a) Obtenir des rendements potentiellement élevés et rapides, même si cela implique des frais variés et une structure plus complexe.</span>
+                    <input type="radio" name="q1" value="a"> <span data-i18n="q1a">a) To obtain potentially high and quick returns, even if it involves various fees and a more complex structure.</span>
                 </label>
                 <label>
-                    <input type="radio" name="q1" value="b"> <span data-i18n="q1b">b) Assurer une croissance stable et sécurisée de mon capital, avec une structure de contribution simple et transparente.</span>
-                </label>
-            </div>
-
-            <div class="question-block">
-                <strong data-i18n="q2">2. Comment gérez-vous les frais d'adhésion et de participation à un programme ?</strong>
-                <label>
-                    <input type="radio" name="q2" value="a"> <span data-i18n="q2a">a) Je suis prêt(e) à payer des frais initiaux et récurrents plus élevés si cela ouvre la porte à des opportunités de gains plus importantes.</span>
-                </label>
-                <label>
-                    <input type="radio" name="q2" value="b"> <span data-i18n="q2b">b) Je préfère des frais minimes ou fixes, avec une clarté totale sur toutes les contributions requises.</span>
+                    <input type="radio" name="q1" value="b"> <span data-i18n="q1b">b) To ensure stable and secure capital growth, with a simple and transparent contribution structure, favoring sharing.</span>
                 </label>
             </div>
 
             <div class="question-block">
-                <strong data-i18n="q3">3. Quelle est votre vision de la contribution des membres au succès du programme ?</strong>
+                <strong data-i18n="q2">2. How do you manage program membership and participation fees?</strong>
                 <label>
-                    <input type="radio" name="q3" value="a"> <span data-i18n="q3a">a) Le succès dépend en partie de ma capacité à recruter de nouveaux participants, créant ainsi un réseau de croissance.</span>
+                    <input type="radio" name="q2" value="a"> <span data-i18n="q2a">a) I am willing to pay higher initial and recurring fees if it opens the door to greater earning opportunities.</span>
                 </label>
                 <label>
-                    <input type="radio" name="q3" value="b"> <span data-i18n="q3b">b) Le succès repose sur la contribution régulière de tous les membres et une gestion collective pour le bien commun.</span>
-                </label>
-            </div>
-
-            <div class="question-block">
-                <strong data-i18n="q4">4. En cas d'imprévu financier personnel ou pour un autre membre, quelle est votre attente envers le groupe ?</strong>
-                <label>
-                    <input type="radio" name="q4" value="a"> <span data-i18n="q4a">a) Je compte principalement sur mes propres gains du programme pour gérer les imprévus ; le groupe est avant tout une source de revenus.</span>
-                </label>
-                <label>
-                    <input type="radio" name="q4" value="b"> <span data-i18n="q4b">b) J'attends que le groupe dispose d'un fonds de solidarité ou d'un mécanisme d'aide mutuelle pour soutenir les membres en difficulté.</span>
+                    <input type="radio" name="q2" value="b"> <span data-i18n="q2b">b) I prefer minimal or fixed fees, with complete clarity on all required contributions, and a portion dedicated to the common fund.</span>
                 </label>
             </div>
 
             <div class="question-block">
-                <strong data-i18n="q5">5. Qu'est-ce qui est le plus important pour vous dans la gestion d'un programme d'investissement ?</strong>
+                <strong data-i18n="q3">3. What is your view on members' contribution to the program's success?</strong>
                 <label>
-                    <input type="radio" name="q5" value="a"> <span data-i18n="q5a">a) La vision à long terme et les grandes promesses de développement (ex: projets d'hôpitaux, d'entreprises) qui peuvent attirer de nouveaux investisseurs.</span>
+                    <input type="radio" name="q3" value="a"> <span data-i18n="q3a">a) Success partly depends on my ability to recruit new participants, thereby creating a growth network.</span>
                 </label>
                 <label>
-                    <input type="radio" name="q5" value="b"> <span data-i18n="q5b">b) Une transparence totale et un système de comptabilité détaillé, où chaque transaction est clairement enregistrée et accessible.</span>
+                    <input type="radio" name="q3" value="b"> <span data-i18n="q3b">b) Success relies on the regular contribution of all members and collective management for the common good, including resource sharing.</span>
                 </label>
             </div>
 
-            <button type="button" class="results-button" onclick="calculateResults()" data-i18n="showResultsButton">Afficher les Résultats</button>
+            <div class="question-block">
+                <strong data-i18n="q4">4. In case of a personal financial unforeseen event or for another member, what is your expectation from the group?</strong>
+                <label>
+                    <input type="radio" name="q4" value="a"> <span data-i18n="q4a">a) I primarily rely on my own program earnings to manage unforeseen events; the group is first and foremost a source of income.</span>
+                </label>
+                <label>
+                    <input type="radio" name="q4" value="b"> <span data-i18n="q4b">b) I expect the group to have a solidarity fund or a mutual aid mechanism to support members in difficulty, based on sharing.</span>
+                </label>
+            </div>
+
+            <div class="question-block">
+                <strong data-i18n="q5">5. What is most important to you in managing an investment program?</strong>
+                <label>
+                    <input type="radio" name="q5" value="a"> <span data-i18n="q5a">a) The long-term vision and big promises of development (e.g., hospital, business projects) that can attract new investors.</span>
+                </label>
+                <label>
+                    <input type="radio" name="q5" value="b"> <span data-i18n="q5b">b) Full transparency and a detailed accounting system, where every transaction is clearly recorded and accessible, promoting trust and sharing.</span>
+                </label>
+            </div>
+
+            <button type="button" class="results-button" onclick="calculateResults()" data-i18n="showResultsButton">Show Results</button>
         </form>
     </div>
 
     <!-- Custom Modal for Results -->
     <div id="resultsModal" class="modal-overlay">
         <div class="modal-content">
-            <h2 data-i18n="resultsModalTitle">Résultats du Quiz</h2>
+            <h2 data-i18n="resultsModalTitle">Quiz Results</h2>
             <p id="resultsText"></p>
-            <button class="modal-close-button" onclick="hideResultsModal()" data-i18n="closeButton">Fermer</button>
+            <button class="modal-close-button" onclick="hideResultsModal()" data-i18n="closeButton">Close</button>
         </div>
     </div>
 
     <script>
         const translations = {
             en: {
-                quizTitle: "Investment Program Preference Quiz",
-                quizPageTitle: "Investment Program Preference Quiz",
-                quizIntro1: "This quiz is designed to help you better understand which type of investment program best matches your preferences and risk tolerance, based on group savings program concepts.",
-                quizIntro2: "This is not a professional financial assessment, but a tool to help you think about what is most important to you in an investment program.",
+                quizTitle: "Investment Program Eligibility Quiz",
+                quizPageTitle: "Investment Program Eligibility Quiz",
+                quizIntro1: "This quiz is designed to assess if your preferences align with the philosophy of our investment program, which emphasizes sharing and collaboration, mirroring the calculations of our simulator.",
+                quizIntro2: "This is not a professional financial assessment, but a tool to help you think about what is most important to you in a sharing-focused investment program.",
                 quizInstructionsTitle: "Instructions:",
                 quizInstructionsText: "Please answer each of the following questions. There are no right or wrong answers.",
                 q1: "1. What is your main goal when investing?",
                 q1a: "a) To obtain potentially high and quick returns, even if it involves various fees and a more complex structure.",
-                q1b: "b) To ensure stable and secure capital growth, with a simple and transparent contribution structure.",
+                q1b: "b) To ensure stable and secure capital growth, with a simple and transparent contribution structure, favoring sharing.",
                 q2: "2. How do you manage program membership and participation fees?",
                 q2a: "a) I am willing to pay higher initial and recurring fees if it opens the door to greater earning opportunities.",
-                q2b: "b) I prefer minimal or fixed fees, with complete clarity on all required contributions.",
+                q2b: "b) I prefer minimal or fixed fees, with complete clarity on all required contributions, and a portion dedicated to the common fund.",
                 q3: "3. What is your view on members' contribution to the program's success?",
                 q3a: "a) Success partly depends on my ability to recruit new participants, thereby creating a growth network.",
-                q3b: "b) Success relies on the regular contribution of all members and collective management for the common good.",
+                q3b: "b) Success relies on the regular contribution of all members and collective management for the common good, including resource sharing.",
                 q4: "4. In case of a personal financial unforeseen event or for another member, what is your expectation from the group?",
                 q4a: "a) I primarily rely on my own program earnings to manage unforeseen events; the group is first and foremost a source of income.",
-                q4b: "b) I expect the group to have a solidarity fund or a mutual aid mechanism to support members in difficulty.",
+                q4b: "b) I expect the group to have a solidarity fund or a mutual aid mechanism to support members in difficulty, based on sharing.",
                 q5: "5. What is most important to you in managing an investment program?",
                 q5a: "a) The long-term vision and big promises of development (e.g., hospital, business projects) that can attract new investors.",
-                q5b: "b) Full transparency and a detailed accounting system, where every transaction is clearly recorded and accessible.",
+                q5b: "b) Full transparency and a detailed accounting system, where every transaction is clearly recorded and accessible, promoting trust and sharing.",
                 showResultsButton: "Show Results",
                 resultsModalTitle: "Quiz Results",
-                resultsA: "If the majority of your answers are \"a\", you are likely more attracted to an investment program focused on potentially high returns, dynamic structures, and growth based on network expansion.",
-                resultsB: "If the majority of your answers are \"b\", you would probably be more comfortable in an investment program that prioritizes transparency, contribution security, and solidarity among participants.",
+                resultsA: "If the majority of your answers are \"a\", you might prefer an investment program focused on individual high returns and dynamic growth. This program might not be the best fit if you are looking for a strong emphasis on collective sharing and mutual support.",
+                resultsB: "If the majority of your answers are \"b\", you are likely a good fit for our investment program. It prioritizes transparency, secure contributions, and solidarity among participants, aligning with a philosophy of collective sharing and mutual benefit.",
                 closeButton: "Close",
                 pleaseAnswerAll: "Please answer all questions before seeing the results."
             },
             fr: {
-                quizTitle: "Quiz de Préférence de Programme d'Investissement",
-                quizPageTitle: "Quiz de Préférence de Programme d'Investissement",
-                quizIntro1: "Ce quiz est conçu pour vous aider à mieux comprendre quel type de programme d'investissement correspond le mieux à vos préférences et à votre tolérance au risque, en se basant sur les concepts de programmes d'épargne de groupe.",
-                quizIntro2: "Il ne s'agit pas d'une évaluation financière professionnelle, mais d'un outil pour vous aider à réfléchir à ce qui est le plus important pour vous dans un programme d'investissement.",
+                quizTitle: "Quiz d'Admissibilité au Programme d'Investissement",
+                quizPageTitle: "Quiz d'Admissibilité au Programme d'Investissement",
+                quizIntro1: "Ce quiz est conçu pour évaluer si vos préférences s'alignent avec la philosophie de notre programme d'investissement, qui met l'accent sur le partage et la collaboration, à l'image des calculs de notre simulateur.",
+                quizIntro2: "Il ne s'agit pas d'une évaluation financière professionnelle, mais d'un outil pour vous aider à réfléchir à ce qui est le plus important pour vous dans un programme d'investissement axé sur le partage.",
                 quizInstructionsTitle: "Instructions :",
                 quizInstructionsText: "Veuillez répondre à chacune des questions suivantes. Il n'y a pas de bonnes ou de mauvaises réponses.",
                 q1: "1. Quel est votre objectif principal lorsque vous investissez ?",
                 q1a: "a) Obtenir des rendements potentiellement élevés et rapides, même si cela implique des frais variés et une structure plus complexe.",
-                q1b: "b) Assurer une croissance stable et sécurisée de mon capital, avec une structure de contribution simple et transparente.",
+                q1b: "b) Assurer une croissance stable et sécurisée de mon capital, avec une structure de contribution simple et transparente, favorisant le partage.",
                 q2: "2. Comment gérez-vous les frais d'adhésion et de participation à un programme ?",
                 q2a: "a) Je suis prêt(e) à payer des frais initiaux et récurrents plus élevés si cela ouvre la porte à des opportunités de gains plus importantes.",
-                q2b: "b) Je préfère des frais minimes ou fixes, avec une clarté totale sur toutes les contributions requises.",
+                q2b: "b) Je préfère des frais minimes ou fixes, avec une clarté totale sur toutes les contributions requises, et une partie dédiée au fonds commun.",
                 q3: "3. Quelle est votre vision de la contribution des membres au succès du programme ?",
                 q3a: "a) Le succès dépend en partie de ma capacité à recruter de nouveaux participants, créant ainsi un réseau de croissance.",
-                q3b: "b) Le succès repose sur la contribution régulière de tous les membres et une gestion collective pour le bien commun.",
+                q3b: "b) Le succès repose sur la contribution régulière de tous les membres et une gestion collective pour le bien commun, incluant le partage des ressources.",
                 q4: "4. En cas d'imprévu financier personnel ou pour un autre membre, quelle est votre attente envers le groupe ?",
                 q4a: "a) Je compte principalement sur mes propres gains du programme pour gérer les imprévus ; le groupe est avant tout une source de revenus.",
-                q4b: "b) J'attends que le groupe dispose d'un fonds de solidarité ou d'un mécanisme d'aide mutuelle pour soutenir les membres en difficulté.",
+                q4b: "b) J'attends que le groupe dispose d'un fonds de solidarité ou d'un mécanisme d'aide mutuelle pour soutenir les membres en difficulté, basé sur le partage.",
                 q5: "5. Qu'est-ce qui est le plus important pour vous dans la gestion d'un programme d'investissement ?",
                 q5a: "a) La vision à long terme et les grandes promesses de développement (ex: projets d'hôpitaux, d'entreprises) qui peuvent attirer de nouveaux investisseurs.",
-                q5b: "b) Une transparence totale et un système de comptabilité détaillé, où chaque transaction est clairement enregistrée et accessible.",
+                q5b: "b) Une transparence totale et un système de comptabilité détaillé, où chaque transaction est clairement enregistrée et accessible, favorisant la confiance et le partage.",
                 showResultsButton: "Afficher les Résultats",
                 resultsModalTitle: "Résultats du Quiz",
-                resultsA: "Si la majorité de vos réponses sont « a », vous êtes probablement plus attiré(e) par un programme d'investissement axé sur des rendements potentiellement élevés, des structures dynamiques et une croissance basée sur l'expansion.",
-                resultsB: "Si la majorité de vos réponses sont « b », vous seriez probablement plus à l'aise dans un programme d'investissement qui privilégie la transparence, la sécurité des contributions et la solidarité entre les participants.",
+                resultsA: "Si la majorité de vos réponses sont « a », vous pourriez préférer un programme d'investissement axé sur des rendements individuels élevés et une croissance dynamique. Ce programme pourrait ne pas être le meilleur choix si vous recherchez une forte emphase sur le partage collectif et le soutien mutuel.",
+                resultsB: "Si la majorité de vos réponses sont « b », vous êtes probablement un bon candidat pour notre programme d'investissement. Il privilégie la transparence, la sécurité des contributions et la solidarité entre les participants, s'alignant sur une philosophie de partage collectif et de bénéfice mutuel.",
                 closeButton: "Fermer",
                 pleaseAnswerAll: "Veuillez répondre à toutes les questions avant de voir les résultats."
+            },
+            es: {
+                quizTitle: "Cuestionario de Elegibilidad del Programa de Inversión",
+                quizPageTitle: "Cuestionario de Elegibilidad del Programa de Inversión",
+                quizIntro1: "Este cuestionario está diseñado para evaluar si sus preferencias se alinean con la filosofía de nuestro programa de inversión, que enfatiza el intercambio y la colaboración, reflejando los cálculos de nuestro simulador.",
+                quizIntro2: "Esta no es una evaluación financiera profesional, sino una herramienta para ayudarle a reflexionar sobre lo que es más importante para usted en un programa de inversión centrado en el intercambio.",
+                quizInstructionsTitle: "Instrucciones:",
+                quizInstructionsText: "Por favor, responda cada una de las siguientes preguntas. No hay respuestas correctas o incorrectas.",
+                q1: "1. ¿Cuál es su objetivo principal al invertir?",
+                q1a: "a) Obtener rendimientos potencialmente altos y rápidos, incluso si implica varios gastos y una estructura más compleja.",
+                q1b: "b) Asegurar un crecimiento de capital estable y seguro, con una estructura de contribución simple y transparente, favoreciendo el intercambio.",
+                q2: "2. ¿Cómo gestiona las tarifas de membresía y participación en un programa?",
+                q2a: "a) Estoy dispuesto(a) a pagar tarifas iniciales y recurrentes más altas si eso abre la puerta a mayores oportunidades de ganancias.",
+                q2b: "b) Prefiero tarifas mínimas o fijas, con total claridad sobre todas las contribuciones requeridas, y una parte dedicada al fondo común.",
+                q3: "3. ¿Cuál es su visión sobre la contribución de los miembros al éxito del programa?",
+                q3a: "a) El éxito depende en parte de mi capacidad para reclutar nuevos participantes, creando así una red de crecimiento.",
+                q3b: "b) El éxito se basa en la contribución regular de todos los miembros y una gestión colectiva para el bien común, incluyendo el intercambio de recursos.",
+                q4: "4. En caso de un imprevisto financiero personal o para otro miembro, ¿cuál es su expectativa del grupo?",
+                q4a: "a) Me baso principalmente en mis propias ganancias del programa para gestionar imprevistos; el grupo es ante todo una fuente de ingresos.",
+                q4b: "b) Espero que el grupo tenga un fondo de solidaridad o un mecanismo de ayuda mutua para apoyar a los miembros en dificultad, basado en el intercambio.",
+                q5: "5. ¿Qué es lo más importante para usted en la gestión de un programa de inversión?",
+                q5a: "a) La visión a largo plazo y las grandes promesas de desarrollo (ej: proyectos de hospitales, negocios) que pueden atraer a nuevos inversores.",
+                q5b: "b) Una transparencia total y un sistema de contabilidad detallado, donde cada transacción esté claramente registrada y accesible, promoviendo la confianza y el intercambio.",
+                showResultsButton: "Mostrar Resultados",
+                resultsModalTitle: "Resultados del Cuestionario",
+                resultsA: "Si la mayoría de sus respuestas son \"a\", es probable que prefiera un programa de inversión centrado en rendimientos individuales altos y crecimiento dinámico. Este programa podría no ser la mejor opción si busca un fuerte énfasis en el intercambio colectivo y el apoyo mutuo.",
+                resultsB: "Si la mayoría de sus respuestas son \"b\", es probable que se ajuste bien a nuestro programa de inversión. Prioriza la transparencia, la seguridad de las contribuciones y la solidaridad entre los participantes, alineándose con una filosofía de intercambio colectivo y beneficio mutuo.",
+                closeButton: "Cerrar",
+                pleaseAnswerAll: "Por favor, responda todas las preguntas antes de ver los resultados."
+            },
+            ht: {
+                quizTitle: "Kwis Kalifikasyon Pwogram Envestisman",
+                quizPageTitle: "Kwis Kalifikasyon Pwogram Envestisman",
+                quizIntro1: "Kwis sa a fèt pou ede ou konprann pi byen si preferans ou yo aliyen ak filozofi pwogram envestisman nou an, ki mete aksan sou pataj ak kolaborasyon, menm jan ak kalkil simulatè nou an.",
+                quizIntro2: "Sa a pa yon evalyasyon finansye pwofesyonèl, men yon zouti pou ede ou reflechi sou sa ki pi enpòtan pou ou nan yon pwogram envestisman ki baze sou pataj.",
+                quizInstructionsTitle: "Enstriksyon :",
+                quizInstructionsText: "Tanpri reponn chak kesyon sa yo. Pa gen bon oswa move repons.",
+                q1: "1. Ki objektif prensipal ou lè ou envesti ?",
+                q1a: "a) Jwenn gwo pwofi potansyèlman rapid, menm si sa vle di gen plizyè frè ak yon estrikti pi konplèks.",
+                q1b: "b) Asire yon kwasans kapital ki estab ak an sekirite, ak yon estrikti kontribisyon senp ak transparan, ki ankouraje pataj.",
+                q2: "2. Kijan ou jere frè manm ak patisipasyon nan yon pwogram ?",
+                q2a: "a) Mwen pare pou peye pi gwo frè inisyal ak renouvlab si sa louvri pòt pou pi gwo opòtinite pou fè lajan.",
+                q2b: "b) Mwen prefere frè minim oswa fiks, ak klè total sou tout kontribisyon ki nesesè, ak yon pati dedye a fon komen an.",
+                q3: "3. Ki vizyon ou sou kontribisyon manm yo nan siksè pwogram nan ?",
+                q3a: "a) Siksè depann an pati sou kapasite mwen pou rekrite nouvo patisipan yo, konsa kreye yon rezo kwasans.",
+                q3b: "b) Siksè depann sou kontribisyon regilye tout manm yo ak yon jesyon kolektif pou byen komen an, ki gen ladan pataj resous yo.",
+                q4: "4. Nan ka yon evènman finansye pèsonèl inatandi oswa pou yon lòt manm, kisa ou atann de gwoup la ?",
+                q4a: "a) Mwen konte prensipalman sou pwòp pwofi mwen nan pwogram nan pou jere evènman inatandi; gwoup la se anvan tout bagay yon sous revni.",
+                q4b: "b) Mwen atann gwoup la gen yon fon solidarite oswa yon mekanis èd mityèl pou sipòte manm ki an difikilte, ki baze sou pataj.",
+                q5: "5. Kisa ki pi enpòtan pou ou nan jesyon yon pwogram envestisman ?",
+                q5a: "a) Vizyon alontèm ak gwo pwomès devlopman (egzanp: pwojè lopital, biznis) ki ka atire nouvo envestisè.",
+                q5b: "b) Yon transparans total ak yon sistèm kontablite detaye, kote chak tranzaksyon anrejistre klèman epi aksesib, ki ankouraje konfyans ak pataj.",
+                showResultsButton: "Montre Rezilta yo",
+                resultsModalTitle: "Rezilta Kwis la",
+                resultsA: "Si majorite repons ou yo se « a », ou ta ka prefere yon pwogram envestisman ki konsantre sou gwo pwofi endividyèl ak kwasans dinamik. Pwogram sa a ta ka pa pi bon chwa si w ap chèche yon gwo anfaz sou pataj kolektif ak sipò mityèl.",
+                resultsB: "Si majorite repons ou yo se « b », ou gen anpil chans pou w adapte byen ak pwogram envestisman nou an. Li priyorize transparans, sekirite kontribisyon, ak solidarite pami patisipan yo, ki aliyen ak yon filozofi pataj kolektif ak benefis mityèl.",
+                closeButton: "Fèmen",
+                pleaseAnswerAll: "Tanpri reponn tout kesyon yo anvan ou wè rezilta yo."
             }
         };
 
-        let currentLanguage = 'fr'; // Default language to French
+        let currentLanguage = 'en'; // Default language to English
 
         /**
          * Sets the language of the application.
-         * @param {string} lang - The language code ('en' or 'fr').
+         * @param {string} lang - The language code ('en', 'fr', 'es', or 'ht').
          */
         function setLanguage(lang) {
             currentLanguage = lang;
@@ -347,7 +415,7 @@
             } else if (countB > countA) {
                 resultsTextElement.textContent = translations[currentLanguage].resultsB;
             } else {
-                resultsTextElement.textContent = translations[currentLanguage].resultsA + " " + translations[currentLanguage].resultsB + " (" + (currentLanguage === 'fr' ? "Vous avez un mélange équilibré de préférences" : "You have an even mix of preferences") + ")";
+                resultsTextElement.textContent = translations[currentLanguage].resultsA + " " + translations[currentLanguage].resultsB + " (" + (currentLanguage === 'fr' ? "Vous avez un mélange équilibré de préférences" : currentLanguage === 'es' ? "Tienes una mezcla equilibrada de preferencias" : currentLanguage === 'ht' ? "Ou gen yon melanj ekilibre de preferans" : "You have an even mix of preferences") + ")";
             }
             showResultsModal();
         }
@@ -368,8 +436,10 @@
 
         // Set initial language and add event listener for language selector
         window.onload = () => {
-            setLanguage('fr'); // Set initial language to French
-            // No language selector on this page, but keeping setLanguage for initial text load
+            setLanguage('en'); // Set initial language to English
+            document.getElementById('languageSelector').addEventListener('change', (event) => {
+                setLanguage(event.target.value);
+            });
         };
     </script>
 </body>
