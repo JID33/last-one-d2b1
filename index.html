@@ -1,23 +1,376 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr"> <!-- Default language set to French -->
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>D2B1 - Inscription</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="quizTitle">Quiz de Préférence de Programme d'Investissement</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            background-image: linear-gradient(to bottom right, #e9ecef, #dee2e6);
+        }
+        .quiz-container {
+            background-color: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 800px;
+            padding: 40px;
+            text-align: left;
+            position: relative;
+        }
+        .quiz-container h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #6366f1;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .quiz-container p {
+            font-size: 1.1rem;
+            color: #4a6572;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        .question-block {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f8fafc;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+        .question-block strong {
+            display: block;
+            font-size: 1.3rem;
+            color: #3b82f6;
+            margin-bottom: 15px;
+        }
+        .question-block label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: #334155;
+            cursor: pointer;
+        }
+        .question-block input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        .results-button {
+            display: inline-block;
+            background-image: linear-gradient(to bottom right, #22c55e, #16a34a);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 30px;
+            cursor: pointer;
+            border: none;
+        }
+        .results-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s ease;
+        }
+
+        .modal-overlay.visible {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.visible .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-content h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #3b82f6;
+            margin-bottom: 15px;
+        }
+
+        .modal-content p {
+            font-size: 1.1rem;
+            color: #4a6572;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .modal-close-button {
+            background-color: #ef4444; /* Red */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .modal-close-button:hover {
+            background-color: #dc2626; /* Darker red */
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h2>D2B1 - Inscription</h2>
-    <form id="registerForm">
-      <input type="text" id="name" placeholder="Nom complet" required />
-      <input type="email" id="email" placeholder="Adresse e-mail" required />
-      <input type="password" id="password" placeholder="Mot de passe" required />
-      <input type="password" id="confirmPassword" placeholder="Confirmez le mot de passe" required />
-      <button type="submit">S'inscrire</button>
-    </form>
-    <p>Déjà inscrit ? <a href="login.html">Se connecter</a></p>
-  </div>
-  <script src="script.js"></script>
+    <div class="quiz-container">
+        <h1 data-i18n="quizPageTitle">Quiz de Préférence de Programme d'Investissement</h1>
+        <p data-i18n="quizIntro1">Ce quiz est conçu pour vous aider à mieux comprendre quel type de programme d'investissement correspond le mieux à vos préférences et à votre tolérance au risque, en se basant sur les concepts de programmes d'épargne de groupe.</p>
+        <p data-i18n="quizIntro2">Il ne s'agit pas d'une évaluation financière professionnelle, mais d'un outil pour vous aider à réfléchir à ce qui est le plus important pour vous dans un programme d'investissement.</p>
+
+        <h2 data-i18n="quizInstructionsTitle">Instructions :</h2>
+        <p data-i18n="quizInstructionsText">Veuillez répondre à chacune des questions suivantes. Il n'y a pas de bonnes ou de mauvaises réponses.</p>
+
+        <form id="quizForm">
+            <div class="question-block">
+                <strong data-i18n="q1">1. Quel est votre objectif principal lorsque vous investissez ?</strong>
+                <label>
+                    <input type="radio" name="q1" value="a"> <span data-i18n="q1a">a) Obtenir des rendements potentiellement élevés et rapides, même si cela implique des frais variés et une structure plus complexe.</span>
+                </label>
+                <label>
+                    <input type="radio" name="q1" value="b"> <span data-i18n="q1b">b) Assurer une croissance stable et sécurisée de mon capital, avec une structure de contribution simple et transparente.</span>
+                </label>
+            </div>
+
+            <div class="question-block">
+                <strong data-i18n="q2">2. Comment gérez-vous les frais d'adhésion et de participation à un programme ?</strong>
+                <label>
+                    <input type="radio" name="q2" value="a"> <span data-i18n="q2a">a) Je suis prêt(e) à payer des frais initiaux et récurrents plus élevés si cela ouvre la porte à des opportunités de gains plus importantes.</span>
+                </label>
+                <label>
+                    <input type="radio" name="q2" value="b"> <span data-i18n="q2b">b) Je préfère des frais minimes ou fixes, avec une clarté totale sur toutes les contributions requises.</span>
+                </label>
+            </div>
+
+            <div class="question-block">
+                <strong data-i18n="q3">3. Quelle est votre vision de la contribution des membres au succès du programme ?</strong>
+                <label>
+                    <input type="radio" name="q3" value="a"> <span data-i18n="q3a">a) Le succès dépend en partie de ma capacité à recruter de nouveaux participants, créant ainsi un réseau de croissance.</span>
+                </label>
+                <label>
+                    <input type="radio" name="q3" value="b"> <span data-i18n="q3b">b) Le succès repose sur la contribution régulière de tous les membres et une gestion collective pour le bien commun.</span>
+                </label>
+            </div>
+
+            <div class="question-block">
+                <strong data-i18n="q4">4. En cas d'imprévu financier personnel ou pour un autre membre, quelle est votre attente envers le groupe ?</strong>
+                <label>
+                    <input type="radio" name="q4" value="a"> <span data-i18n="q4a">a) Je compte principalement sur mes propres gains du programme pour gérer les imprévus ; le groupe est avant tout une source de revenus.</span>
+                </label>
+                <label>
+                    <input type="radio" name="q4" value="b"> <span data-i18n="q4b">b) J'attends que le groupe dispose d'un fonds de solidarité ou d'un mécanisme d'aide mutuelle pour soutenir les membres en difficulté.</span>
+                </label>
+            </div>
+
+            <div class="question-block">
+                <strong data-i18n="q5">5. Qu'est-ce qui est le plus important pour vous dans la gestion d'un programme d'investissement ?</strong>
+                <label>
+                    <input type="radio" name="q5" value="a"> <span data-i18n="q5a">a) La vision à long terme et les grandes promesses de développement (ex: projets d'hôpitaux, d'entreprises) qui peuvent attirer de nouveaux investisseurs.</span>
+                </label>
+                <label>
+                    <input type="radio" name="q5" value="b"> <span data-i18n="q5b">b) Une transparence totale et un système de comptabilité détaillé, où chaque transaction est clairement enregistrée et accessible.</span>
+                </label>
+            </div>
+
+            <button type="button" class="results-button" onclick="calculateResults()" data-i18n="showResultsButton">Afficher les Résultats</button>
+        </form>
+    </div>
+
+    <!-- Custom Modal for Results -->
+    <div id="resultsModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 data-i18n="resultsModalTitle">Résultats du Quiz</h2>
+            <p id="resultsText"></p>
+            <button class="modal-close-button" onclick="hideResultsModal()" data-i18n="closeButton">Fermer</button>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                quizTitle: "Investment Program Preference Quiz",
+                quizPageTitle: "Investment Program Preference Quiz",
+                quizIntro1: "This quiz is designed to help you better understand which type of investment program best matches your preferences and risk tolerance, based on group savings program concepts.",
+                quizIntro2: "This is not a professional financial assessment, but a tool to help you think about what is most important to you in an investment program.",
+                quizInstructionsTitle: "Instructions:",
+                quizInstructionsText: "Please answer each of the following questions. There are no right or wrong answers.",
+                q1: "1. What is your main goal when investing?",
+                q1a: "a) To obtain potentially high and quick returns, even if it involves various fees and a more complex structure.",
+                q1b: "b) To ensure stable and secure capital growth, with a simple and transparent contribution structure.",
+                q2: "2. How do you manage program membership and participation fees?",
+                q2a: "a) I am willing to pay higher initial and recurring fees if it opens the door to greater earning opportunities.",
+                q2b: "b) I prefer minimal or fixed fees, with complete clarity on all required contributions.",
+                q3: "3. What is your view on members' contribution to the program's success?",
+                q3a: "a) Success partly depends on my ability to recruit new participants, thereby creating a growth network.",
+                q3b: "b) Success relies on the regular contribution of all members and collective management for the common good.",
+                q4: "4. In case of a personal financial unforeseen event or for another member, what is your expectation from the group?",
+                q4a: "a) I primarily rely on my own program earnings to manage unforeseen events; the group is first and foremost a source of income.",
+                q4b: "b) I expect the group to have a solidarity fund or a mutual aid mechanism to support members in difficulty.",
+                q5: "5. What is most important to you in managing an investment program?",
+                q5a: "a) The long-term vision and big promises of development (e.g., hospital, business projects) that can attract new investors.",
+                q5b: "b) Full transparency and a detailed accounting system, where every transaction is clearly recorded and accessible.",
+                showResultsButton: "Show Results",
+                resultsModalTitle: "Quiz Results",
+                resultsA: "If the majority of your answers are \"a\", you are likely more attracted to an investment program focused on potentially high returns, dynamic structures, and growth based on network expansion.",
+                resultsB: "If the majority of your answers are \"b\", you would probably be more comfortable in an investment program that prioritizes transparency, contribution security, and solidarity among participants.",
+                closeButton: "Close",
+                pleaseAnswerAll: "Please answer all questions before seeing the results."
+            },
+            fr: {
+                quizTitle: "Quiz de Préférence de Programme d'Investissement",
+                quizPageTitle: "Quiz de Préférence de Programme d'Investissement",
+                quizIntro1: "Ce quiz est conçu pour vous aider à mieux comprendre quel type de programme d'investissement correspond le mieux à vos préférences et à votre tolérance au risque, en se basant sur les concepts de programmes d'épargne de groupe.",
+                quizIntro2: "Il ne s'agit pas d'une évaluation financière professionnelle, mais d'un outil pour vous aider à réfléchir à ce qui est le plus important pour vous dans un programme d'investissement.",
+                quizInstructionsTitle: "Instructions :",
+                quizInstructionsText: "Veuillez répondre à chacune des questions suivantes. Il n'y a pas de bonnes ou de mauvaises réponses.",
+                q1: "1. Quel est votre objectif principal lorsque vous investissez ?",
+                q1a: "a) Obtenir des rendements potentiellement élevés et rapides, même si cela implique des frais variés et une structure plus complexe.",
+                q1b: "b) Assurer une croissance stable et sécurisée de mon capital, avec une structure de contribution simple et transparente.",
+                q2: "2. Comment gérez-vous les frais d'adhésion et de participation à un programme ?",
+                q2a: "a) Je suis prêt(e) à payer des frais initiaux et récurrents plus élevés si cela ouvre la porte à des opportunités de gains plus importantes.",
+                q2b: "b) Je préfère des frais minimes ou fixes, avec une clarté totale sur toutes les contributions requises.",
+                q3: "3. Quelle est votre vision de la contribution des membres au succès du programme ?",
+                q3a: "a) Le succès dépend en partie de ma capacité à recruter de nouveaux participants, créant ainsi un réseau de croissance.",
+                q3b: "b) Le succès repose sur la contribution régulière de tous les membres et une gestion collective pour le bien commun.",
+                q4: "4. En cas d'imprévu financier personnel ou pour un autre membre, quelle est votre attente envers le groupe ?",
+                q4a: "a) Je compte principalement sur mes propres gains du programme pour gérer les imprévus ; le groupe est avant tout une source de revenus.",
+                q4b: "b) J'attends que le groupe dispose d'un fonds de solidarité ou d'un mécanisme d'aide mutuelle pour soutenir les membres en difficulté.",
+                q5: "5. Qu'est-ce qui est le plus important pour vous dans la gestion d'un programme d'investissement ?",
+                q5a: "a) La vision à long terme et les grandes promesses de développement (ex: projets d'hôpitaux, d'entreprises) qui peuvent attirer de nouveaux investisseurs.",
+                q5b: "b) Une transparence totale et un système de comptabilité détaillé, où chaque transaction est clairement enregistrée et accessible.",
+                showResultsButton: "Afficher les Résultats",
+                resultsModalTitle: "Résultats du Quiz",
+                resultsA: "Si la majorité de vos réponses sont « a », vous êtes probablement plus attiré(e) par un programme d'investissement axé sur des rendements potentiellement élevés, des structures dynamiques et une croissance basée sur l'expansion.",
+                resultsB: "Si la majorité de vos réponses sont « b », vous seriez probablement plus à l'aise dans un programme d'investissement qui privilégie la transparence, la sécurité des contributions et la solidarité entre les participants.",
+                closeButton: "Fermer",
+                pleaseAnswerAll: "Veuillez répondre à toutes les questions avant de voir les résultats."
+            }
+        };
+
+        let currentLanguage = 'fr'; // Default language to French
+
+        /**
+         * Sets the language of the application.
+         * @param {string} lang - The language code ('en' or 'fr').
+         */
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang; // Set HTML lang attribute
+
+            // Update title
+            document.querySelector('title').textContent = translations[lang].quizTitle;
+
+            // Update elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+        }
+
+        /**
+         * Calculates the quiz results and displays them in a modal.
+         */
+        function calculateResults() {
+            const form = document.getElementById('quizForm');
+            let countA = 0;
+            let countB = 0;
+            let allAnswered = true;
+
+            for (let i = 1; i <= 5; i++) {
+                const questionName = `q${i}`;
+                const selectedOption = form.elements[questionName].value;
+
+                if (!selectedOption) {
+                    allAnswered = false;
+                    break;
+                }
+
+                if (selectedOption === 'a') {
+                    countA++;
+                } else {
+                    countB++;
+                }
+            }
+
+            const resultsTextElement = document.getElementById('resultsText');
+            if (!allAnswered) {
+                resultsTextElement.textContent = translations[currentLanguage].pleaseAnswerAll;
+            } else if (countA > countB) {
+                resultsTextElement.textContent = translations[currentLanguage].resultsA;
+            } else if (countB > countA) {
+                resultsTextElement.textContent = translations[currentLanguage].resultsB;
+            } else {
+                resultsTextElement.textContent = translations[currentLanguage].resultsA + " " + translations[currentLanguage].resultsB + " (" + (currentLanguage === 'fr' ? "Vous avez un mélange équilibré de préférences" : "You have an even mix of preferences") + ")";
+            }
+            showResultsModal();
+        }
+
+        /**
+         * Displays the results modal.
+         */
+        function showResultsModal() {
+            document.getElementById('resultsModal').classList.add('visible');
+        }
+
+        /**
+         * Hides the results modal.
+         */
+        function hideResultsModal() {
+            document.getElementById('resultsModal').classList.remove('visible');
+        }
+
+        // Set initial language and add event listener for language selector
+        window.onload = () => {
+            setLanguage('fr'); // Set initial language to French
+            // No language selector on this page, but keeping setLanguage for initial text load
+        };
+    </script>
 </body>
 </html>
