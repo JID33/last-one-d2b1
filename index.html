@@ -269,7 +269,8 @@
                 resultsA: "If the majority of your answers are \"a\", you might prefer an investment program focused on individual high returns and dynamic growth. This program might not be the best fit if you are looking for a strong emphasis on collective sharing and mutual support.",
                 resultsB: "If the majority of your answers are \"b\", you are likely a good fit for our investment program. It prioritizes transparency, secure contributions, and solidarity among participants, aligning with a philosophy of collective sharing and mutual benefit.",
                 closeButton: "Close",
-                pleaseAnswerAll: "Please answer all questions before seeing the results."
+                pleaseAnswerAll: "Please answer all questions before seeing the results.",
+                yourChoices: "You chose {countA} 'a' and {countB} 'b'."
             },
             fr: {
                 quizTitle: "Quiz d'Admissibilité au Programme d'Investissement",
@@ -298,7 +299,8 @@
                 resultsA: "Si la majorité de vos réponses sont « a », vous pourriez préférer un programme d'investissement axé sur des rendements individuels élevés et une croissance dynamique. Ce programme pourrait ne pas être le meilleur choix si vous recherchez une forte emphase sur le partage collectif et le soutien mutuel.",
                 resultsB: "Si la majorité de vos réponses sont « b », vous êtes probablement un bon candidat pour notre programme d'investissement. Il privilégie la transparence, la sécurité des contributions et la solidarité entre les participants, s'alignant sur une philosophie de partage collectif et de bénéfice mutuel.",
                 closeButton: "Fermer",
-                pleaseAnswerAll: "Veuillez répondre à toutes les questions avant de voir les résultats."
+                pleaseAnswerAll: "Veuillez répondre à toutes les questions avant de voir les résultats.",
+                yourChoices: "Vous avez choisi {countA} 'a' et {countB} 'b'."
             },
             es: {
                 quizTitle: "Cuestionario de Elegibilidad del Programa de Inversión",
@@ -327,7 +329,8 @@
                 resultsA: "Si la mayoría de sus respuestas son \"a\", es probable que prefiera un programa de inversión centrado en rendimientos individuales altos y crecimiento dinámico. Este programa podría no ser la mejor opción si busca un fuerte énfasis en el intercambio colectivo y el apoyo mutuo.",
                 resultsB: "Si la mayoría de sus respuestas son \"b\", es probable que se ajuste bien a nuestro programa de inversión. Prioriza la transparencia, la seguridad de las contribuciones y la solidaridad entre los participantes, alineándose con una filosofía de intercambio colectivo y beneficio mutuo.",
                 closeButton: "Cerrar",
-                pleaseAnswerAll: "Por favor, responda todas las preguntas antes de ver los resultados."
+                pleaseAnswerAll: "Por favor, responda todas las preguntas antes de ver los resultados.",
+                yourChoices: "Usted eligió {countA} 'a' y {countB} 'b'."
             },
             ht: {
                 quizTitle: "Kwis Kalifikasyon Pwogram Envestisman",
@@ -356,7 +359,8 @@
                 resultsA: "Si majorite repons ou yo se « a », ou ta ka prefere yon pwogram envestisman ki konsantre sou gwo pwofi endividyèl ak kwasans dinamik. Pwogram sa a ta ka pa pi bon chwa si w ap chèche yon gwo anfaz sou pataj kolektif ak sipò mityèl.",
                 resultsB: "Si majorite repons ou yo se « b », ou gen anpil chans pou w adapte byen ak pwogram envestisman nou an. Li priyorize transparans, sekirite kontribisyon, ak solidarite pami patisipan yo, ki aliyen ak yon filozofi pataj kolektif ak benefis mityèl.",
                 closeButton: "Fèmen",
-                pleaseAnswerAll: "Tanpri reponn tout kesyon yo anvan ou wè rezilta yo."
+                pleaseAnswerAll: "Tanpri reponn tout kesyon yo anvan ou wè rezilta yo.",
+                yourChoices: "Ou te chwazi {countA} 'a' ak {countB} 'b'."
             }
         };
 
@@ -367,6 +371,7 @@
          * @param {string} lang - The language code ('en', 'fr', 'es', or 'ht').
          */
         function setLanguage(lang) {
+            console.log(`Setting language to: ${lang}`); // Debugging log
             currentLanguage = lang;
             document.documentElement.lang = lang; // Set HTML lang attribute
 
@@ -410,12 +415,22 @@
             const resultsTextElement = document.getElementById('resultsText');
             if (!allAnswered) {
                 resultsTextElement.textContent = translations[currentLanguage].pleaseAnswerAll;
-            } else if (countA > countB) {
-                resultsTextElement.textContent = translations[currentLanguage].resultsA;
-            } else if (countB > countA) {
-                resultsTextElement.textContent = translations[currentLanguage].resultsB;
             } else {
-                resultsTextElement.textContent = translations[currentLanguage].resultsA + " " + translations[currentLanguage].resultsB + " (" + (currentLanguage === 'fr' ? "Vous avez un mélange équilibré de préférences" : currentLanguage === 'es' ? "Tienes una mezcla equilibrada de preferencias" : currentLanguage === 'ht' ? "Ou gen yon melanj ekilibre de preferans" : "You have an even mix of preferences") + ")";
+                let resultSummary = "";
+                if (countA > countB) {
+                    resultSummary = translations[currentLanguage].resultsA;
+                } else if (countB > countA) {
+                    resultSummary = translations[currentLanguage].resultsB;
+                } else {
+                    resultSummary = translations[currentLanguage].resultsA + " " + translations[currentLanguage].resultsB + " (" + (currentLanguage === 'fr' ? "Vous avez un mélange équilibré de préférences" : currentLanguage === 'es' ? "Tienes una mezcla equilibrada de preferencias" : currentLanguage === 'ht' ? "Ou gen yon melanj ekilibre de preferans" : "You have an even mix of preferences") + ")";
+                }
+                
+                // Add the count of 'a' and 'b' answers
+                const choicesSummary = translations[currentLanguage].yourChoices
+                                        .replace('{countA}', countA)
+                                        .replace('{countB}', countB);
+                
+                resultsTextElement.textContent = resultSummary + "\n\n" + choicesSummary;
             }
             showResultsModal();
         }
